@@ -1,4 +1,6 @@
 using Libreria_SAEG.Data;
+using Libreria_SAEG.Data.Models;
+using Libreria_SAEG.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +36,10 @@ namespace Libreria_SAEG
             services.AddControllers();
             //Configurar DbContext con SQL
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+            //Configuramos el servicio para que pueda ser usado
+            services.AddTransient<BooksService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Libreria_SAEG", Version = "v1" });
@@ -60,6 +66,7 @@ namespace Libreria_SAEG
             {
                 endpoints.MapControllers();
             });
+            AppDbInitializer.Seed(app);
         }
     }
 }
