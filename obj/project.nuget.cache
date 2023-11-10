@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z7ZvPexONoz2idxlVYoMPeY5EBasEHSXY58KH+feiVcKDRy5iVLSkxF2TKgR+Ei/ExKLsoMNGLVN3U/kB0riWw==",
+  "dgSpecHash": "34jyiEhEWXlnDwidCg4dqifr1hi2lFseR/Lj12RcFuCsFxMIEmu3hayWCtxfqi39dPidZqnN+rMafXiR7Cmxqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Shino\\Source\\Repos\\Web_Api_Libreria_SAEG\\Libreria_SAEG.csproj",
+  "projectFilePath": "C:\\Users\\Shino\\source\\repos\\Web_Api_Libreria_SAEG\\Libreria_SAEG.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Shino\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Shino\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
