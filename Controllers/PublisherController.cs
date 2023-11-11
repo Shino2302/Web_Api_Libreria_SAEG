@@ -22,6 +22,11 @@ namespace Libreria_SAEG.Controllers
             _publisherServices.AddPublisher(publisher);
             return Ok();
         }
-
+        [HttpGet("get-publisher-with-books-and-authors-by-id/{id}")]
+        public IActionResult GetPublisherWithBooksAndAuthors(int id)
+        {
+            var response = _publisherServices.GetPublisherWithBooksAndAuthors(id);
+            return Ok(response);
+        }
     }
 }
