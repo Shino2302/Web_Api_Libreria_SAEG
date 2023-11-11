@@ -26,7 +26,6 @@ namespace Libreria_SAEG.Data
                         DateRaed = System.DateTime.Now.AddDays(-10),
                         Rate = "4",
                         Genero = "Biography",
-                        Autor = "1st Author",
                         ConverUrl = "https...",
                         DateAdded = DateTime.Now
                     },
@@ -37,7 +36,6 @@ namespace Libreria_SAEG.Data
                         IsRead = false,
                         Rate = "4",
                         Genero = "Biography",
-                        Autor = "2nd Author",
                         ConverUrl = "https...",
                         DateAdded = DateTime.Now
                     });

@@ -1,5 +1,5 @@
 ﻿using Libreria_SAEG.Data.Services;
-using Libreria_SAEG.Data.Services.ViewModel;
+using Libreria_SAEG.Data.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,10 +30,10 @@ namespace Libreria_SAEG.Controllers
             return Ok(book);
         }
 
-        [HttpPost("add-book")]
-        public IActionResult AddBook([FromBody] BookVM book)
+        [HttpPost("add-book-with-authors")]
+        public IActionResult AddBookWithAuthors([FromBody] BookVM book)
         {
-            _booksService.AddBook(book);
+            _booksService.AddBookWithAuthors(book);
             return Ok();
         }
 

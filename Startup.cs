@@ -39,6 +39,8 @@ namespace Libreria_SAEG
 
             //Configuramos el servicio para que pueda ser usado
             services.AddTransient<BooksService>();
+            services.AddTransient<AuthorService>();
+            services.AddTransient<PublisherService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -66,7 +68,7 @@ namespace Libreria_SAEG
             {
                 endpoints.MapControllers();
             });
-            AppDbInitializer.Seed(app);
+            //AppDbInitializer.Seed(app);
         }
     }
 }

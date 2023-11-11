@@ -15,7 +15,6 @@ namespace Libreria_SAEG.Data.Models
         public DateTime? DateRaed { get; set; }
         public string Rate { get; set; }
         public string Genero { get; set; }
-        public string Autor { get; set; }
         public string ConverUrl { get; set; }
         public DateTime DateAdded { get; set; }
 

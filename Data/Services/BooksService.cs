@@ -1,9 +1,9 @@
-﻿using Libreria_SAEG.Data.Services.ViewModel;
-using Libreria_SAEG.Data.Models;
+﻿using Libreria_SAEG.Data.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
+using Libreria_SAEG.Data.ViewModel;
 
 namespace Libreria_SAEG.Data.Services
 {
@@ -16,7 +16,7 @@ namespace Libreria_SAEG.Data.Services
             _context = context;
         }
 
-        public void AddBook(BookVM book)
+        public void AddBookWithAuthors(BookVM book)
         {
             var _book = new Book()
             {
@@ -26,17 +26,44 @@ namespace Libreria_SAEG.Data.Services
                 DateRaed = book.DateRaed,
                 Rate = book.Rate,
                 Genero = book.Genero,
-                Autor = book.Autor,
                 ConverUrl = book.ConverUrl,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                PublisherId = book.PublisherID
             };
             _context.Books.Add(_book);
             _context.SaveChanges();
+
+            foreach (var id in book.AuthorIDs)
+            {
+                var _book_author = new Book_Author()
+                {
+                    BookId = _book.id,
+                    AuthorId = id
+                };
+                _context.Book_Authors.Add(_book_author);
+                _context.SaveChanges();
+            }
+
         }
 
         public List<Book> GetAllBks() => _context.Books.ToList();
 
-        public Book GetBookById(int bookId) => _context.Books.FirstOrDefault(n => n.id == bookId);
+        public BookWithAuthorsVM GetBookById(int bookId)
+        {
+            var _bookWithAuthors = _context.Books.Where(n => n.id == bookId).Select(book => new BookWithAuthorsVM()
+            {
+                Titulo = book.Titulo,
+                Descripcion = book.Descripcion,
+                IsRead = book.IsRead,
+                DateRaed = book.DateRaed,
+                Rate = book.Rate,
+                Genero = book.Genero,
+                ConverUrl = book.ConverUrl,
+                PublisherName = book.Publisher.Name,
+                AuthorNames = book.Book_Authors.Select(n => n.Author.FullName).ToList()
+            }).FirstOrDefault();
+            return _bookWithAuthors;
+        }
 
         public Book UpdateBookByID(int bookId, BookVM book)
         {
@@ -49,7 +76,6 @@ namespace Libreria_SAEG.Data.Services
                 _book.DateRaed = book.DateRaed;
                 _book.Rate = book.Rate;
                 _book.Genero = book.Genero;
-                _book.Autor = book.Autor;
                 _book.ConverUrl = book.ConverUrl;
 
                 _context.SaveChanges();
