@@ -25,7 +25,7 @@ namespace Libreria_SAEG.Controllers
 
         [HttpGet("get-book-by-id/{id}")]
         public IActionResult GetBookById(int id)
-        { 
+        {
             var book = _booksService.GetBookById(id);
             return Ok(book);
         }
@@ -38,10 +38,17 @@ namespace Libreria_SAEG.Controllers
         }
 
         [HttpPut("update-book-by-id/{id}")]
-        public IActionResult UpdateBookById(int id, [FromBody]BookVM book)
+        public IActionResult UpdateBookById(int id, [FromBody] BookVM book)
         {
             var updateBook = _booksService.UpdateBookByID(id, book);
             return Ok(updateBook);
+        }
+
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookById(int id)
+        {
+            _booksService.DeleteBookByID(id);
+            return Ok();
         }
     }
 }

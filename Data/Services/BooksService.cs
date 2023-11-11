@@ -56,5 +56,14 @@ namespace Libreria_SAEG.Data.Services
             }
             return _book;
         }
+        public void DeleteBookByID(int bookId)
+        {
+            var _book = _context.Books.FirstOrDefault(n => n.id == bookId);
+            if(_book != null)
+            {
+                _context.Books.Remove(_book);
+                _context.SaveChanges();
+            }
+        }
     }
 }
