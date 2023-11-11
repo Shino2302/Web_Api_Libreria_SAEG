@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Threading;
@@ -17,5 +18,9 @@ namespace Libreria_SAEG.Data.Models
         public string Autor { get; set; }
         public string ConverUrl { get; set; }
         public DateTime DateAdded { get; set; }
+
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; }
+        public List<Book_Author> Book_Authors { get; set; }
     }
 }
