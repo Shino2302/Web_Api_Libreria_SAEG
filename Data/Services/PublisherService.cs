@@ -3,6 +3,9 @@ using Libreria_SAEG.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Libreria_SAEG.Data.ViewModel;
 using System.Linq;
+using System;
+using System.Text.RegularExpressions;
+using Libreria_SAEG.Excepciones;
 
 namespace Libreria_SAEG.Data.Services
 {
@@ -15,15 +18,22 @@ namespace Libreria_SAEG.Data.Services
             _context = context;
         }
 
-        public void AddPublisher(PublisherVM publisher)
+        public Publisher AddPublisher(PublisherVM publisher)
         {
+            if (StringStartsWithNumber(publisher.Name))
+                throw new PublisherNameException(
+                    "El nombre empieza con un número", publisher.Name);
             var _publisher= new Publisher()
             {
                 Name = publisher.Name
             };
             _context.Publishers.Add(_publisher);
             _context.SaveChanges();
+
+            return _publisher;
         }
+
+        public Publisher GetPublisherById(int id) => _context.Publishers.FirstOrDefault(n => n.Id == id);
         public PublisherWithBooksAndAuthorsVM GetPublisherWithBooksAndAuthors(int publisherId)
         {
             var _publisherData = _context.Publishers.Where(n => n.Id == publisherId).Select(n => new PublisherWithBooksAndAuthorsVM
@@ -37,5 +47,19 @@ namespace Libreria_SAEG.Data.Services
             }).FirstOrDefault();
             return _publisherData;
         }
+        public void DeletePublisherById(int id) 
+        {
+            var _publisher = _context.Publishers.FirstOrDefault(n => n.Id == id);
+            if(_publisher != null ) 
+            {
+                _context.Publishers.Remove(_publisher);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"La editora con el id: {id} no existe!");
+            }
+        }
+        private bool StringStartsWithNumber(string name) => (Regex.IsMatch(name, @"^\d"));
     }
 }
